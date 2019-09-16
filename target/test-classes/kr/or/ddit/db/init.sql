@@ -113,3 +113,20 @@ Insert into USERS (USERID,USERNM,PASS,REG_DT,ALIAS,ADDR1,ADDR2,ZIPCODE,FILENAME,
 Insert into USERS (USERID,USERNM,PASS,REG_DT,ALIAS,ADDR1,ADDR2,ZIPCODE,FILENAME,REALFILENAME,REALFILENAME2) values ('xuserid100','xusernm100','xuserid100pass',to_date('2016/11/16','YYYY/MM/DD'),'xuseralais100',null,null,null,null,null,null);
 
 commit;
+
+select * from not_exists_in_prd;
+
+truncate table lprod; --복구가 불가능(아카이브 로그를 남기지 않는다.)
+
+Insert into LPROD (LPROD_ID,LPROD_GU,LPROD_NM) values (1,'P101','컴퓨터제품');
+Insert into LPROD (LPROD_ID,LPROD_GU,LPROD_NM) values (2,'P102','전자제품');
+Insert into LPROD (LPROD_ID,LPROD_GU,LPROD_NM) values (3,'P201','여성캐주얼');
+Insert into LPROD (LPROD_ID,LPROD_GU,LPROD_NM) values (4,'P202','남성캐주얼');
+Insert into LPROD (LPROD_ID,LPROD_GU,LPROD_NM) values (5,'P301','피혁잡화');
+Insert into LPROD (LPROD_ID,LPROD_GU,LPROD_NM) values (6,'P302','화장품');
+Insert into LPROD (LPROD_ID,LPROD_GU,LPROD_NM) values (7,'P401','음반/CD');
+Insert into LPROD (LPROD_ID,LPROD_GU,LPROD_NM) values (8,'P402','도서');
+Insert into LPROD (LPROD_ID,LPROD_GU,LPROD_NM) values (9,'P403','문구류');
+Insert into LPROD (LPROD_ID,LPROD_GU,LPROD_NM) values (10,'P501','농산물');
+
+commit;
