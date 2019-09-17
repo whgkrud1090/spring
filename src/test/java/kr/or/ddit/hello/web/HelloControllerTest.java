@@ -39,7 +39,7 @@ public class HelloControllerTest extends WebTestConfig{
 	
 	@Test
 	public void helloTest2() throws Exception {
-		//응답상태비교 -> 200으로 정상적으로 왔는지
+		//응답상태비교 -> 200으로 정상처리 여부 판단 
 		//name비교
 		mockMvc.perform(get("/hello/hello.do").param("userId", "sally"))
 			.andExpect(status().isOk()).andExpect(view().name("hello/hello"))

@@ -13,7 +13,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:kr/or/ddit/config/spring/servlet-context.xml")	//controller scan : servlet-context.xml
+@ContextConfiguration(locations = {
+		//controller scan : servlet-context.xml
+		"classpath:kr/or/ddit/config/spring/context-root.xml",
+		"classpath:kr/or/ddit/config/spring/context-datasource-test.xml",
+		"classpath:kr/or/ddit/config/spring/context-transaction.xml",
+		"classpath:kr/or/ddit/config/spring/servlet-context.xml"
+		})	
 @WebAppConfiguration
 public class WebTestConfig {
 
