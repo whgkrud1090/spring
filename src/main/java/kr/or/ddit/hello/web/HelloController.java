@@ -19,7 +19,7 @@ public class HelloController {
 		//Application -> Application
 		model.addAttribute("nowDt", new Date());
 		model.addAttribute("msg", "hello, world");
-		model.addAttribute("userId", request.getParameter("userId") + "_helloContrll");
+		model.addAttribute("userId", request.getParameter("userId") + "_helloControll");
 		
 		return "hello/hello";	//	/WEB-IMF/views/hello/hello.jsp
 	}
