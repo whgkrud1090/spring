@@ -82,7 +82,7 @@ $(document).ready(function(){
 									이동 경로는 차단한다.
 								--%>
 									<c:choose>
-										<c:when test="${pageVo.page == 1}">
+										<c:when test="${param.page == 1}">
 											<li class="disabled">
 										        <span aria-hidden="true">&laquo;</span>
 								   			</li>
@@ -116,9 +116,9 @@ $(document).ready(function(){
 								
 									
 								<c:choose>
-										<c:when test="${pageVo.page == totalCnt}">
+										<c:when test="${param.page == totalCnt}">
 											<li class="disabled">
-										        <span aria-hidden="true">&laquo;</span>
+										        <span aria-hidden="true">&raquo;</span>
 								   			</li>
 										</c:when>
 										<c:otherwise>
