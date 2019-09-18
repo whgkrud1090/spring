@@ -7,9 +7,11 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<!-- @Controller 어노테이션이 붙은 클래스만 스캔 -->
+	<!-- 스캔할 어노테이션을 지정해준다. -->
+	<!-- @Controller, @ControllerAdvice 어노테이션이 붙은 클래스만 스캔 -->
 	<context:component-scan base-package="kr.or.ddit" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>
 	
 	<context:annotation-config/>
@@ -36,5 +38,15 @@
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="5242880"/>	<!-- 5mb -->
 		<property name="maxUploadSizePerFile" value="26214400"/>	<!-- 25mb -->
+	</bean>
+	
+	<!-- resource bundle bean id는 messageSource 로 고정되어 있다. -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<!-- 오류메시지 파일의 경로를 지정해준다. -->
+				<value>classpath:kr/or/ddit/config/msg/error</value>
+			</list>
+		</property>
 	</bean>
 </beans>

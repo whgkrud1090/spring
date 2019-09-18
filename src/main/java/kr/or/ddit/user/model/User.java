@@ -2,6 +2,8 @@ package kr.or.ddit.user.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
@@ -14,10 +16,10 @@ public class User {
 	//pattern을 지정해주어야한다.
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date reg_dt;
-	
-//	private int age;
-	
+
+	@NotNull
 	private String pass;		//사용자 비밀번호
+	
 	private String addr1;		//주소1
 	private String addr2;		//주소2
 	private String zipcode;		//우편번호
