@@ -90,6 +90,16 @@ public class UserControllerTest extends WebTestConfig{
 		.andExpect(status().is(302)); //.andExpect(view().name("redirecr:user/user"));
 	}
 	
+	@Test
+	public void userUpdateTest() throws Exception {
+		File f = new File("src/test/resources/kr/or/ddit/test/sally.png");
+		FileInputStream fis = new FileInputStream(f);
+		MockMultipartFile file = new MockMultipartFile("picture", "sally.png", "", fis);
+		
+		mockMvc.perform(fileUpload("/user/userUpdate").file(file).param("userId", "brownTest").param("userNm", "브라운").param("alias", "곰테스트").param("addr1", "대전광역시 중구 중앙로 76").param("addr2", "DDIT").param("reg_dt", "2019-08-08").param("zipcode", "34940").param("pass", "brownTest1234"))
+		.andExpect(status().isOk());
+	}
+	
 	/**
 	* Method : pageTest
 	* 작성자 : PC-03
