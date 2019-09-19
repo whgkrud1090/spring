@@ -225,7 +225,7 @@ public class UserController {
 	* Method 설명 : 사용자 수정 요청
 	 */
 	@RequestMapping(path = "userUpdate", method = RequestMethod.POST)
-	public String userUpdate(User user, BindingResult result, @RequestPart("picture") MultipartFile picture) {
+	public String userUpdate(User user, BindingResult result, @RequestPart("picture") MultipartFile picture, String userId) {
 		new UserValidator().validate(user, result);
 		if(result.hasErrors()) {
 			return "user/userUpdate"; 
@@ -244,8 +244,12 @@ public class UserController {
 				} catch (IllegalStateException | IOException e) {
 					e.printStackTrace();
 				}
+			}else {
+				User orgin = userService.getUser(userId);
+				user.setFilename(orgin.getFilename());
+				user.setRealFilename(orgin.getRealFilename());
 			}
-			int updateCnt = userService.updateUser(user);
+					int updateCnt = userService.updateUser(user);
 			
 			if(updateCnt == 1) return "redirect:/user/user?userId=" + user.getUserId();
 			return "user/userUpdate"; 
