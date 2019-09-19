@@ -20,11 +20,25 @@
 		HandlerAdapter 설정-->
 	<mvc:annotation-driven/>
 	
-<!-- 스프링이 처리하지 못하는 요청에 대해서 was(servlet-container)에 있는 default servlet으로 처리 위임 -->
+	<!-- 스프링이 처리하지 못하는 요청에 대해서 was(servlet-container)에 있는 default servlet으로 처리 위임 -->
 	<mvc:default-servlet-handler/> 
 
-	<!-- view resolver : jsp - InternalResourceViewResolver -->
+	<!-- view resolver : beanNameViewResolver (order 0) -->
+	<!-- controller가 리턴하는 viewNAme과 일치하는 spring Bean이 있으면(view) 해당 view객체를 통해 응답을 생성하도록한다. -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0"/>
+	</bean>
+
+	<!-- model객체에 있는 속성들을 json문자열로 응답 생성-->	
+	<bean name="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+	
+	<!-- feilDownloadView : 고정된 이미지를 다운로드(sally.png) -->
+	<bean name="fileDownloadView" class="kr.or.ddit.view.FileDownloadView"/>
+	<!-- view resolver : jsp - InternalResourceViewResolver (order 1)
+		해당리소스(jsp)가 존재하지 않더라도 그대로 forward, 오타등으로 잘못입력할 시 404가 발생
+	-->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="1"/>	<!-- value가 낮을수록 우선순위가 높다. -->
 		<property name="prefix" value="/WEB-INF/views/"/>	<!-- 접두어 -->
 		<property name="suffix" value=".jsp"/>	<!-- 접미어 -->
 		<!-- controller 에서 리턴하는 viewName prefix의 suffix가 결합되서 jsp 경로를 판단 
