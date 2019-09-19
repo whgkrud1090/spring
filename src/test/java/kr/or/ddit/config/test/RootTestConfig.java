@@ -26,6 +26,7 @@ public class RootTestConfig {
 	
 	@Before
 	public void setup() {
+		
 		//init.sql에 있는 모든 sql 문장을 테스트 메소드 실행전에 실행
 		//init.sql에 있는 table 데이터 삭제, 데이터 입력 sql 문장이 있다.
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();

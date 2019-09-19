@@ -60,12 +60,11 @@ $(document).ready(function() {
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				
 				<%--파일 전송은 post만 가능 --%>
-				<form id="frm" class="form-horizontal" role="form" action="${cp }/userupdate" method="post" enctype="multipart/form-data">
+				<form id="frm" class="form-horizontal" role="form" action="${cp }/user/userUpdate" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
-<%-- 							<img src="${cp }${user.realfilename2 }"/> --%>
-							<img src="${cp }/userpicture?userId=${user.userId}"/>
+							<img src="${cp }/user/picture?userId=${user.userId}"/>
 						<input type="file" class="form-control" id="picture" name="picture"
 								placeholder="사용자 사진">
 						</div>

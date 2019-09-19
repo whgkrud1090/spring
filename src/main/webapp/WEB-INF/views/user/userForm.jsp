@@ -17,12 +17,17 @@
 
 <title>Jsp-basicLib</title>
 <%@ include file="/WEB-INF/views/commonJsp/basicLib.jsp"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
 // 	setTestData();
+
+	$('#regBtn').on('click', function() {
+		$('#frm').submit();
+	})
 	
 	//우편번호 검색 버튼 클릭 이벤트
 	$('#zipcodeBtn').on('click',function() {
@@ -38,6 +43,16 @@ $(document).ready(function() {
 	    }).open();
 	});
 });
+function setTestData(){
+      $("#userId").val("brownTest");
+      $("#userNm").val("브라운테스트");
+      $("#alias").val("곰테스트");
+      $("#reg_dt").val("2019-08-08");
+      $("#addr1").val("대전광역시 중구 중앙로 76");
+      $("#addr2").val("영민빌딩 2층 DDIT");
+      $("#zipcode").val("34940");
+      $("#pass").val("brownTest1234");
+ }
 
 </script>
 </head>
@@ -55,7 +70,7 @@ $(document).ready(function() {
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				
 				<%--파일 전송은 post만 가능 --%>
-				<form id="frm" class="form-horizontal" role="form" action="${cp }/userupdate" method="post" enctype="multipart/form-data">
+				<form id="frm" class="form-horizontal" role="form" action="${cp }/user/userForm" method="post" enctype="multipart/form-data">
 					
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
@@ -69,7 +84,7 @@ $(document).ready(function() {
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="userId" name="userId"
 								placeholder="사용자 아이디" value="${parm.userId }">
-								${userIdMsg }
+							<font color="red"><form:errors path="user.userId"/></font>
 						</div>
 					</div>
 
@@ -128,7 +143,7 @@ $(document).ready(function() {
 
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-default" id="regBtn">사용자 등록</button>
+							<button type="button" class="btn btn-default" id="regBtn">사용자 등록</button>
 						</div>
 					</div>
 				</form>
