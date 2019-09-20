@@ -3,6 +3,7 @@ package kr.or.ddit.user.web;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
@@ -99,7 +100,7 @@ public class UserController {
 //	public String userPagingList(Page page, Model model) {
 		
 		Page page = new Page(p, pagesize);
-		model.addAttribute("userVo", page);
+		model.addAttribute("pageVo", page);
 		//addAttribute / addAllAttribute()
 		model.addAllAttributes(userService.getUserPagingList(page));
 		return "user/userPagingList";
@@ -255,4 +256,31 @@ public class UserController {
 			return "user/userUpdate"; 
 		}
 	}
+	
+	@RequestMapping("userPagingListAjaxView")
+	public String userPaginListAjaxView() {
+		return "user/userPagingListAjaxView";
+	}
+	
+	@RequestMapping(path = "userPagingListAjax", method = RequestMethod.GET)
+	public String userPagingListAjax(@RequestParam(name = "page", defaultValue = "1")int p, @RequestParam(defaultValue = "10")int pagesize, Model model) {
+		
+		Page page = new Page(p, pagesize);
+		model.addAttribute("pageVo", page);
+		//addAttribute / addAllAttribute()
+		model.addAllAttributes(userService.getUserPagingList(page));
+		return "jsonView";
+	}
+	
+	//사용자 페이징 리스트의 결과를 html로 생성한다.
+	@RequestMapping("userPagingListHtmlAjax")
+	public String userPagingListHtmlAjax(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int pagesize, Model model) {
+		
+		Page pageVo = new Page(page, pagesize);
+		Map<String, Object> resultMap = userService.getUserPagingList(pageVo);
+		model.addAllAttributes(resultMap);
+		model.addAttribute("pageVo", pageVo);
+		return "user/userPagingListHtmlAjax";
+	}
+	
 }
