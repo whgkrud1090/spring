@@ -105,7 +105,17 @@ public class UserController {
 		model.addAttribute("pageVo", page);
 		//addAttribute / addAllAttribute()
 		model.addAllAttributes(userService.getUserPagingList(page));
-		return "user/userPagingList";
+		return "tiles.userPagingList";
+		
+		/*
+		 viewResolver order에 따라
+		 1.tilesViewSolver가 tiles definition 파일중에 
+		 	1-1. 검색이 될 경우 해당 definition 이름을 검색
+		 	1-2. 검색이 안될 경우 다음 우선순의를 갖는 viewResolver가 처리
+		 	
+		 	2.beanNamaViewResolver
+		 	3. intesceptorResolver
+		 */
 	}
 	
 	/**
@@ -120,7 +130,7 @@ public class UserController {
 	@RequestMapping(path = "user", method = RequestMethod.GET)
 	public String user(Model model, String userId) {
 		model.addAttribute(userService.getUser(userId));
-		return "user/user";
+		return "tiles.user";
 	}
 	
 	/**

@@ -27,7 +27,10 @@
 	</aop:config>
 	
 	<!-- userService -->
-	<context:component-scan base-package="kr.or.ddit"/>
+	<context:component-scan base-package="kr.or.ddit" use-default-filters="false">
+	<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+	<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan>
 	<context:annotation-config/>
 	
 </beans>

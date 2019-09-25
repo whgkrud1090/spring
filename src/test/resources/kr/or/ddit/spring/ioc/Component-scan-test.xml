@@ -20,7 +20,9 @@
 		해당 옵션을 false로 설정하여 개발자가 필요로 하는 어노테이션에 대해서만 스캔 하도록 설정하는 것이 가능
 		<context:include-filter>, <context:exclude-filter> 두 엘리먼트를 활용하여 어노테이션 필터를 설정
 	-->
-	<context:component-scan base-package="kr.or.ddit">
+	<context:component-scan base-package="kr.or.ddit" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 	</context:component-scan>
 	
 	<!-- 스캔 이후에 @Resource, @AutoWired, @Inject 어노테이션에 대한 후처리 -->

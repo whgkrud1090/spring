@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,6 +19,7 @@ import kr.or.ddit.user.model.User;
 //테스트 코드의 오류는 @ContextConfiguration을 설정해주지 않아 Scan할 수 없었기 때문이다. : 20190917 해결
 
 // NoSuchBean
+//@ContextConfiguration
 public class LoginControllerTest extends WebTestConfig{
 
 	/**

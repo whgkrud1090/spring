@@ -13,8 +13,8 @@ import kr.or.ddit.user.service.IUserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = 
-{"classpath:kr/or/ddit/spring/ioc/Component-scan-test.xml"		//test resource
-,"classpath:kr/or/ddit/config/spring/context-datasource-test.xml"})	//test resource
+{"classpath:kr/or/ddit/config/spring/context-datasource-test.xml"
+,"classpath:kr/or/ddit/spring/aop/application-context-aop-test.xml"})	//test resource
 public class AopTest {
 
 	@Resource(name="userService")
