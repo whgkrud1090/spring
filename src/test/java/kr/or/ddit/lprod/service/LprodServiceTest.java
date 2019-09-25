@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import kr.or.ddit.common.model.Page;

@@ -15,10 +15,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.common.model.Page;
@@ -272,7 +274,16 @@ public class UserController {
 		return "jsonView";
 	}
 	
-	//사용자 페이징 리스트의 결과를 html로 생성한다.
+	/**
+	* Method : userPagingListHtmlAjax
+	* 작성자 : PC-03
+	* 변경이력 :
+	* @param page
+	* @param pagesize
+	* @param model
+	* @return
+	* Method 설명 : 사용자 페이징 리스트의 결과를 html로 생성한다.
+ 	 */
 	@RequestMapping("userPagingListHtmlAjax")
 	public String userPagingListHtmlAjax(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int pagesize, Model model) {
 		
@@ -281,6 +292,21 @@ public class UserController {
 		model.addAllAttributes(resultMap);
 		model.addAttribute("pageVo", pageVo);
 		return "user/userPagingListHtmlAjax";
+	}
+	
+	//@RequestBody을 java 객체로 바꾼다.
+	@RequestMapping(path = "userPagingListAjaxRequestBody", method = RequestMethod.POST)
+	@ResponseBody()
+	public Map<String, Object> userPagingListAjaxRequestBody(@RequestBody Page page, Model model) {
+		Map<String, Object> resultMap = userService.getUserPagingList(page);
+		
+		//Map으로 보내야하기 때문에 resultMap에 추가해서 보내주어야한다.
+		resultMap.put("pageVo", page);
+		
+		//{userList : [{userId : "brown", alias : "곰"}, {}, {} ... ], paginationSize : 11}
+		//model.addAllAttributes(resultMap);
+		
+		return resultMap;
 	}
 	
 }

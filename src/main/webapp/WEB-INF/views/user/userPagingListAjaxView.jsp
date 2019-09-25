@@ -80,6 +80,26 @@ function getUserHtmlList(page, pagesize) {
 		}
 	});
 }
+function getUserListRequestBody(page, pagesize) {
+	
+	var param = {};
+	param.page = page;
+	param.pagesize = pagesize;
+	
+	console.log("param : ", param);
+	
+	$.ajax({
+		url:"${cp}/user/userPagingListAjaxRequestBody",
+		contentType : "application/json",
+		dataType : "json",	//보내는 것도 json문자열 받는 것도 json문자열
+		method : "post",
+		data : JSON.stringify(param),	//json문자열을 문자열
+		success: function(data) {
+			createUserListTbody(data.userList);	//userList html생성
+			createPagination(data.pageVo, data.paginationSize);	//페이지 네이션 html생성
+		}
+	});
+}
 
 //ajax call을 통해 page, pagesize 하는 사용자
 function getUserList(page, pagesize) {
